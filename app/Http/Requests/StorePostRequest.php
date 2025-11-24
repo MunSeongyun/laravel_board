@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Services\TrixSanitizer;
 
 class StorePostRequest extends FormRequest
 {
@@ -25,5 +26,16 @@ class StorePostRequest extends FormRequest
             'title' => 'required|string|max:100',
             'content' => 'required|string',
         ];
+    }
+
+    protected function prepareForValidation()
+    {
+        $sanitizer = app(TrixSanitizer::class);
+
+        if($this->has('content')){
+            $this->merge([
+                'content' => $sanitizer->clean($this->input('content')),
+            ]);
+        }
     }
 }

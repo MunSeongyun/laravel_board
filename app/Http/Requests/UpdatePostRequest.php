@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Services\TrixSanitizer;
 
 class UpdatePostRequest extends FormRequest
 {
@@ -25,5 +26,14 @@ class UpdatePostRequest extends FormRequest
             'title' => 'string|max:100',
             'content' => 'string',
         ];
+    }
+
+    protected function prepareForValidation(TrixSanitizer $sanitizer)
+    {
+        if($this->has('content')){
+            $this->merge([
+                'content' => $sanitizer->clean($this->input('content')),
+            ]);
+        }
     }
 }
