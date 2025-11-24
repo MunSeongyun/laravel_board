@@ -15,7 +15,8 @@
 
     <form action="{{ route('posts.store') }}" method="POST">
         @csrf <!-- CSRF 토큰 -->
-
+        <x-rich-text::styles theme="richtextlaravel" />
+        <x-trix-input id="bio" name="bio" />
         <div>
             <label for="title">제목:</label><br>
             <input type="text" id="title" name="title" value="{{ old('title') }}" style="width: 300px;">

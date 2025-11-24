@@ -16,7 +16,7 @@
         @foreach ($posts as $post)
             <li>
                 <a href="{{ route('posts.show', $post) }}">
-                    {{ $post->title }}
+                    <x-post-list :post="$post"/>
                 </a>
             </li>
         @endforeach

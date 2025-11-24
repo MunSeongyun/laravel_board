@@ -14,19 +14,17 @@
     <hr>
 
     <div style="white-space: pre-wrap; margin-bottom: 20px;">
-        {{ $post->content }}
+        {!! $post->content !!}
     </div>
 
     <hr>
 
     <a href="{{ route('posts.index') }}">목록으로 돌아가기</a>
 
-    <!-- PostPolicy의 'update' 권한이 있는 사용자에게만 보임 -->
     @can('update', $post)
         <a href="{{ route('posts.edit', $post) }}">수정</a>
     @endcan
 
-    <!-- PostPolicy의 'delete' 권한이 있는 사용자에게만 보임 -->
     @can('delete', $post)
         <form action="{{ route('posts.destroy', $post) }}" method="POST" style="display: inline-block; margin-left: 10px;">
             @csrf
