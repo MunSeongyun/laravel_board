@@ -14,6 +14,60 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         <x-rich-text::styles theme="richtextlaravel" data-turbo-track="false" />
+        <script type="module">
+            import {
+                Application,
+                Controller
+            } from 'https://cdn.skypack.dev/@hotwired/stimulus'
+
+            window.Stimulus = Application.start()
+
+            class UploadManager {
+                upload(event) {
+                    if (! event?.attachment?.file) return
+                    
+                    const form = new FormData()
+                    form.append('attachment', event.attachment.file)
+
+                    const options = {
+                        method: 'POST',
+                        body: form,
+                        headers: {
+                            'X-CSRF-TOKEN': document.head.querySelector('meta[name=csrf-token]').content,
+                        }
+                    }
+
+                    fetch('/attachments', options)
+                        .then(resp => resp.json())
+                        .then((data) => {
+                            event.attachment.setAttributes({
+                                url: data.image_url,
+                                href: data.image_url,
+                            })
+                        })
+                }
+            }
+
+            Stimulus.register("rich-text-uploader", class extends Controller {
+                static values = { acceptFiles: Boolean }
+
+                #uploader
+
+                connect() {
+                    this.#uploader = new UploadManager()
+                }
+
+                upload(event) {
+                    if (! this.acceptFilesValue) {
+                        event.preventDefault()
+                        return
+                    }
+
+                    this.#uploader.upload(event)
+                }
+            })
+        </script>
+
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">

@@ -16,7 +16,7 @@ class PostFactory extends Factory
      */
 
     public function fakeHtml(){
-        return '<p>' . fake()->paragraphs(3, true) . '</p>' . '<img src="' . 'https://kcenter.yju.ac.kr/api/20250326-085209_2a1d85e0-09d4-11f0-a48c-7979e565b199.png' . '" alt="Random Image">' . '<p>' . fake()->paragraphs(2, true) . '</p>';
+        return '<div>' . fake()->paragraphs(3, true) . '</div>' . '<img src="' . 'https://kcenter.yju.ac.kr/api/20250326-085209_2a1d85e0-09d4-11f0-a48c-7979e565b199.png' . '" alt="Random Image">' . '<div>' . fake()->paragraphs(2, true) . '</div>';
     }
 
     public function definition(): array

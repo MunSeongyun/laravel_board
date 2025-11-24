@@ -31,9 +31,10 @@ class PostController extends Controller
     public function store(StorePostRequest $request)
     {
         $post = new Post($request->validated());
+        dd($post->content->toTrixHtml());
         $post->user_id = auth()->id();
         $post->save();
-
+        
         return redirect()->route('posts.index')->with('success', 'Post created successfully.');
     }
 
@@ -60,7 +61,10 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
-        //
+        $post->update($request->validated());
+
+    
+        return redirect()->route('posts.show', $post)->with('success', '글이 성공적으로 수정되었습니다.');
     }
 
     /**

@@ -26,7 +26,7 @@
         <div>
             <label for="content">내용:</label><br>
             <!-- 기존 데이터 표시 -->
-            <textarea id="content" name="content" rows="10" cols="50">{{ old('content', $post->content) }}</textarea>
+            <x-trix-input id="content" name="content" value="{!! old('content', $post->content->toTrixHtml()) !!}"/>
         </div>
         <br>
         <button type="submit">수정하기</button>

@@ -3,13 +3,13 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+// use Illuminate\Database\Console\Seeds\WithoutModelEvents; // Post Factory가 rich_texts 테이블에 데이터를 저장하게 할 수 있도록
 use Illuminate\Database\Seeder;
 use App\Models\Post;
 
 class DatabaseSeeder extends Seeder
 {
-    use WithoutModelEvents;
+    // use WithoutModelEvents;
 
     /**
      * Seed the application's database.
