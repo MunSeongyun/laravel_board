@@ -21,15 +21,33 @@
 
     <a href="{{ route('posts.index') }}">목록으로 돌아가기</a>
 
-    @can('update', $post)
-        <a href="{{ route('posts.edit', $post) }}">수정</a>
-    @endcan
+    @if ($post->trashed())
+        @can('restore', $post)
+            <form action="{{ route('posts.restore', $post) }}" method="POST" style="display: inline-block; margin-left: 10px;">
+                @csrf
+                @method('PATCH')
+                <button type="submit" onclick="return confirm('정말 복원하시겠습니까?')">복원</button>
+            </form>
+        @endcan
 
-    @can('delete', $post)
-        <form action="{{ route('posts.destroy', $post) }}" method="POST" style="display: inline-block; margin-left: 10px;">
-            @csrf
-            @method('DELETE')
-            <button type="submit" onclick="return confirm('정말 삭제하시겠습니까?')">삭제</button>
-        </form>
-    @endcan
+        @can('forceDelete', $post)
+            <form action="{{ route('posts.forceDelete', $post) }}" method="POST" style="display: inline-block; margin-left: 10px;">
+                @csrf
+                @method('DELETE')
+                <button type="submit" onclick="return confirm('정말 영구삭제하시겠습니까?')">영구삭제</button>
+            </form>
+        @endcan 
+    @else
+        @can('update', $post)
+            <a href="{{ route('posts.edit', $post) }}">수정</a>
+        @endcan
+
+        @can('delete', $post)
+            <form action="{{ route('posts.destroy', $post) }}" method="POST" style="display: inline-block; margin-left: 10px;">
+                @csrf
+                @method('DELETE')
+                <button type="submit" onclick="return confirm('정말 삭제하시겠습니까?')">삭제</button>
+            </form>
+        @endcan 
+    @endif
 </x-app-layout>

@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
+use Illuminate\Support\Facades\Gate;
 
 class PostController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      */
@@ -22,6 +24,8 @@ class PostController extends Controller
      */
     public function create()
     {
+        Gate::authorize('create', Post::class);
+
         return view('posts.create');
     }
 
@@ -30,8 +34,9 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
+        Gate::authorize('create', Post::class);
+
         $post = new Post($request->validated());
-        dd($post->content->toTrixHtml());
         $post->user_id = auth()->id();
         $post->save();
         
@@ -51,8 +56,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        
-
+        Gate::authorize('update', $post);
         return view('posts.edit', compact('post'));
     }
 
@@ -61,6 +65,8 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
+        Gate::authorize('update', $post);
+
         $post->update($request->validated());
 
     
@@ -72,6 +78,8 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+
+        Gate::authorize('delete', $post);
         
         $post->delete();
 

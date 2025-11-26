@@ -7,7 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\User;
 use Tonysm\RichTextLaravel\Models\Traits\HasRichText;
+use App\Policies\PostPolicy;
+use Illuminate\Database\Eloquent\Attributes\UsePolicy;
 
+#[UsePolicy(PostPolicy::class)]
 class Post extends Model
 {
     /** @use HasFactory<\Database\Factories\PostFactory> */

@@ -37,7 +37,7 @@ class PostPolicy
      */
     public function update(User $user, Post $post): bool
     {
-        return $user->id === $post->user_id;
+        return $user->id === $post->user_id || $user->is_admin();
     }
 
     /**
@@ -45,22 +45,22 @@ class PostPolicy
      */
     public function delete(User $user, Post $post): bool
     {
-        return $user->id === $post->user_id;
+        return $user->id === $post->user_id || $user->is_admin() ;
     }
 
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Post $post): bool
+    public function restore(User $user): bool
     {
-        return false;
+        return $user->is_admin();
     }
 
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Post $post): bool
+    public function forceDelete(User $user): bool
     {
-        return false;
+        return $user->is_admin();
     }
 }

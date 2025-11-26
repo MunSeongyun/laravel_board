@@ -28,8 +28,10 @@ class UpdatePostRequest extends FormRequest
         ];
     }
 
-    protected function prepareForValidation(TrixSanitizer $sanitizer)
+    protected function prepareForValidation()
     {
+        $sanitizer = app(TrixSanitizer::class);
+
         if($this->has('content')){
             $this->merge([
                 'content' => $sanitizer->clean($this->input('content')),
