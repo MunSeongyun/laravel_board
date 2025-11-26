@@ -10,7 +10,7 @@ use Tonysm\RichTextLaravel\Models\Traits\HasRichText;
 use App\Policies\PostPolicy;
 use Illuminate\Database\Eloquent\Attributes\UsePolicy;
 
-#[UsePolicy(PostPolicy::class)]
+#[UsePolicy(PostPolicy::class)] // 모델에 정책 연결 (없어도 됨)
 class Post extends Model
 {
     /** @use HasFactory<\Database\Factories\PostFactory> */
@@ -22,6 +22,7 @@ class Post extends Model
         'content'
     ];
 
+    // 리치 텍스트 속성 지정해서 자동으로 content가 TrixRichText 모델로 처리되도록 함
     protected $richTextAttributes = [
         'content',
     ];

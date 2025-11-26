@@ -30,7 +30,7 @@ class UpdatePostRequest extends FormRequest
 
     protected function prepareForValidation()
     {
-        $sanitizer = app(TrixSanitizer::class);
+        $sanitizer = app(TrixSanitizer::class); // TrixSanitizer 서비스 인스턴스 가져오기 (Resolving)
 
         if($this->has('content')){
             $this->merge([

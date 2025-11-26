@@ -11,40 +11,40 @@ class PostController extends Controller
 {
 
     /**
-     * Display a listing of the resource.
+     * post 목록 표시
      */
     public function index()
     {
-        $posts = Post::latest()->paginate(20);
+        $posts = Post::latest()->paginate(20); // 최신 글부터 페이징 처리하여 20개씩 표시
         return view('posts.index', compact('posts'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * post 생성 폼 표시
      */
     public function create()
     {
-        Gate::authorize('create', Post::class);
+        Gate::authorize('create', Post::class); // 권한 확인
 
         return view('posts.create');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * post 저장
      */
     public function store(StorePostRequest $request)
     {
         Gate::authorize('create', Post::class);
 
         $post = new Post($request->validated());
-        $post->user_id = auth()->id();
+        $post->user_id = auth()->id(); // 현재 로그인한 사용자의 ID 할당
         $post->save();
         
         return redirect()->route('posts.index')->with('success', 'Post created successfully.');
     }
 
     /**
-     * Display the specified resource.
+     * post 상세 표시
      */
     public function show(Post $post)
     {
@@ -52,7 +52,7 @@ class PostController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * post 수정 폼 표시
      */
     public function edit(Post $post)
     {
@@ -61,20 +61,20 @@ class PostController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * post 수정 처리
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
         Gate::authorize('update', $post);
 
-        $post->update($request->validated());
+        $post->update($request->validated()); 
 
     
         return redirect()->route('posts.show', $post)->with('success', '글이 성공적으로 수정되었습니다.');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * post 삭제 처리
      */
     public function destroy(Post $post)
     {

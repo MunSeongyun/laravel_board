@@ -7,9 +7,6 @@ use Illuminate\View\View;
 
 class BoardLayout extends Component
 {
-    /**
-     * Get the view / contents that represents the component.
-     */
     public function render(): View
     {
         return view('posts.layout');

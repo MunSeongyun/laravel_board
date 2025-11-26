@@ -11,7 +11,7 @@ class TrixSanitizer
 
     public function __construct()
     {
-        // 생성자에서 설정을 한 번만 로드합니다.
+        // 생성자에서 설정을 로드
         $config = (new HtmlSanitizerConfig())
             ->allowSafeElements()
             ->allowElement('figure', ['class', 'data-trix-attachment', 'data-trix-content-type', 'data-trix-attributes'])
@@ -27,6 +27,7 @@ class TrixSanitizer
         $this->sanitizer = new HtmlSanitizer($config);
     }
 
+    // HTML 정리 메서드
     public function clean(?string $html): string
     {
         if (empty($html)) return '';

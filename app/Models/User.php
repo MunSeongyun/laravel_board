@@ -53,6 +53,7 @@ class User extends Authenticatable
         return $this->hasMany(Post::class);
     }
 
+    // 관리자 여부 확인
     public function is_admin() : bool {
         return $this->email === env('ADMIN_EMAIL', 'testadmin@g.yju.ac.kr');
     }

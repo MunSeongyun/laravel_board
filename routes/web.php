@@ -10,6 +10,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// can:admin 미들웨어를 사용해서 AppServiceProvider에서 정의한 'admin' 권한을 확인
 Route::middleware(['auth', 'can:admin'])->group(function () {
     Route::get('/admin', function () {
         return view('admin.dashboard');

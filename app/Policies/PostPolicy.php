@@ -9,7 +9,7 @@ use Illuminate\Auth\Access\Response;
 class PostPolicy
 {
     /**
-     * Determine whether the user can view any models.
+     * 목록에 접근 할 수 있는지 여부
      */
     public function viewAny(User $user): bool
     {
@@ -17,7 +17,7 @@ class PostPolicy
     }
 
     /**
-     * Determine whether the user can view the model.
+     * 특정 post에 접근 할 수 있는지 여부
      */
     public function view(User $user, Post $post): bool
     {
@@ -25,7 +25,7 @@ class PostPolicy
     }
 
     /**
-     * Determine whether the user can create models.
+     * post를 저장할 수 있는지 여부
      */
     public function create(User $user): bool
     {
@@ -33,7 +33,7 @@ class PostPolicy
     }
 
     /**
-     * Determine whether the user can update the model.
+     * post를 수정할 수 있는지 여부
      */
     public function update(User $user, Post $post): bool
     {
@@ -41,7 +41,7 @@ class PostPolicy
     }
 
     /**
-     * Determine whether the user can delete the model.
+     * post를 삭제할 수 있는지 여부
      */
     public function delete(User $user, Post $post): bool
     {
@@ -49,7 +49,7 @@ class PostPolicy
     }
 
     /**
-     * Determine whether the user can restore the model.
+     * 삭제된 post를 복원할 수 있는지 여부
      */
     public function restore(User $user): bool
     {
@@ -57,7 +57,7 @@ class PostPolicy
     }
 
     /**
-     * Determine whether the user can permanently delete the model.
+     * post를 영구 삭제할 수 있는지 여부
      */
     public function forceDelete(User $user): bool
     {
