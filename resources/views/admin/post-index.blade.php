@@ -1,5 +1,5 @@
 <x-board-layout>
-    <h1>게시글 목록</h1>
+    <h1>삭제된 게시글 목록</h1>
 
     <!-- 성공 메시지 표시 -->
     @if (session('success'))
@@ -8,14 +8,12 @@
         </div>
     @endif
 
-    <a href="{{ route('posts.create') }}">새 글 작성하기</a>
-
     <hr>
 
     <ul>
         @foreach ($posts as $post)
             <li>
-                <a href="{{ route('posts.show', $post) }}">
+                <a href="{{ route('posts.adminShow', $post) }}">
                     <x-post-list :post="$post"/>
                 </a>
             </li>

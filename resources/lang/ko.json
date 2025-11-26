@@ -1,4 +1,7 @@
 {
     "Dashboard": "대시보드",
-    "You're logged in!":"로그인되었습니다!"
+    "You're logged in!":"로그인되었습니다!",
+    "Admin page":   "관리자 페이지",
+    "Post list": "게시물 목록",
+    "BoardName": "게시판"
 }
