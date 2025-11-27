@@ -1,5 +1,5 @@
 <x-app-layout>
     <div>
-        관리자 페이지
+        <a href="{{ route('posts.trashed') }}">삭제된 게시글 목록</a>
     </div>
 </x-app-layout>

@@ -22,6 +22,7 @@
         <br>
         <div>
             <label for="content">내용:</label><br>
+            <!-- views/components/trix-input.blade.php 파일 불러옴 -->
             <x-trix-input id="content" name="content" value="{!! old('content') !!}" acceptFiles="true"/>
         </div>
         <br>
