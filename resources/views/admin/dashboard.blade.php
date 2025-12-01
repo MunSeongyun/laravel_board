@@ -1,5 +1,5 @@
 <x-app-layout>
     <div>
-        <a href="{{ route('posts.trashed') }}">삭제된 게시글 목록</a>
+        <a href="{{ route('posts.trashed') }}">{{ __('Trashed Posts') }}</a>
     </div>
 </x-app-layout>

@@ -1,4 +1,4 @@
-<x-board-layout :boardName="'삭제된 게시글'">
+<x-board-layout boardName="{{ __('Trashed Posts') }}">
     
 
     <!-- 성공 메시지 표시 -->

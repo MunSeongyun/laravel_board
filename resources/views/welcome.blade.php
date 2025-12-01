@@ -24,12 +24,11 @@
             @if (Route::has('login'))
                 <nav class="flex items-center justify-end gap-4">
                     @auth
-                        <a
+                        <x-styled-a
                             href="{{ url('/dashboard') }}"
-                            class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal"
                         >
                             Dashboard
-                        </a>
+                        </x-styled-a>
                     @else
                         <a
                             href="{{ route('login') }}"
@@ -39,11 +38,10 @@
                         </a>
 
                         @if (Route::has('register'))
-                            <a
-                                href="{{ route('register') }}"
-                                class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal">
+                            <x-styled-a
+                                href="{{ route('register') }}">
                                 Register
-                            </a>
+                            </x-styled-a>
                         @endif
                     @endauth
                 </nav>

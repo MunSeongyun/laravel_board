@@ -1,10 +1,9 @@
-<x-board-layout :boardName="'게시판'">
-    <h1>글 수정</h1>
-
+<x-board-layout boardName="{{ __('BoardName') }}">
+    <br>
     <!-- 유효성 검사 에러 표시 -->
     @if ($errors->any())
         <div style="color: red;">
-            <strong>이런! 문제가 발생했습니다.</strong>
+            <strong>{{ __('Error occurred!') }}</strong>
             <ul>
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
@@ -18,19 +17,21 @@
         @method('PUT') <!-- HTTP PUT 메소드 사용 -->
 
         <div>
-            <label for="title">제목:</label><br>
-            <!-- 기존 데이터 표시 -->
-            <input type="text" id="title" name="title" value="{{ old('title', $post->title) }}" style="width: 300px;">
+            <x-input-label for="title" :value="__('Title in post create')"/>
+            <input type="text" id="title" name="title" value="{{ old('title', $post->title) }}" class="w-full">
         </div>
         <br>
         <div>
-            <label for="content">내용:</label><br>
+            <x-input-label for="content" :value="__('Content in post create')" />
             <!-- 기존 데이터 표시 -->
-            <x-trix-input id="content" name="content" value="{!! old('content', $post->content->toTrixHtml()) !!}"/>
+            <x-trix-input id="content" name="content" value="{!! old('content', $post->content->toTrixHtml()) !!}" acceptFiles="true"/>
         </div>
         <br>
-        <button type="submit">수정하기</button>
+        <div class="flex gap-2 flex-row-reverse">
+            <x-styled-button type="submit">{{ __('Edit in post edit') }}</x-styled-button>
+            <x-styled-a href="{{ route('posts.show', $post) }}" >{{ __('Cancel in post edit') }}</x-styled-a>
+        </div>
     </form>
-
-    <a href="{{ route('posts.show', $post) }}">수정 취소</a>
+    
+    
 </x-board-layout>
