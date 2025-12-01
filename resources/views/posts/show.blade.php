@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-board-layout :boardName="'게시판'">
     <!-- 성공 메시지 표시 -->
     @if (session('success'))
         <div style="color: green;">
@@ -6,7 +6,8 @@
         </div>
     @endif
 
-    <h1>{{ $post->title }}</h1>
+    <h1 class="text-2xl">{{ $post->title }}</h1>
+    
     <p>
         <strong>작성자:</strong> {{ $post->user->name ?? '알 수 없음' }} (ID: {{ $post->user_id }})
     </p>
@@ -50,4 +51,4 @@
             </form>
         @endcan 
     @endif
-</x-app-layout>
+</x-board-layout>

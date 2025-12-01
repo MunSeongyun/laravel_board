@@ -1,4 +1,4 @@
-<x-board-layout>
+<x-board-layout :boardName="'게시판'">
     <!-- 성공 메시지 표시 -->
     @if (session('success'))
         <div style="color: green;">

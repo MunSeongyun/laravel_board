@@ -1,6 +1,4 @@
-<x-app-layout>
-    <h1>새 글 작성</h1>
-
+<x-board-layout :boardName="'게시판'">
     <!-- 유효성 검사 에러 표시 -->
     @if ($errors->any())
         <div style="color: red;">
@@ -30,4 +28,4 @@
     </form>
 
     <a href="{{ route('posts.index') }}">목록으로 돌아가기</a>
-</x-app-layout>
+</x-board-layout>

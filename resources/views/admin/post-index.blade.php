@@ -1,5 +1,5 @@
-<x-board-layout>
-    <h1>삭제된 게시글 목록</h1>
+<x-board-layout :boardName="'삭제된 게시글'">
+    
 
     <!-- 성공 메시지 표시 -->
     @if (session('success'))

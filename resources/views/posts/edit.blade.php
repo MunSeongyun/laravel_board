@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-board-layout :boardName="'게시판'">
     <h1>글 수정</h1>
 
     <!-- 유효성 검사 에러 표시 -->
@@ -33,4 +33,4 @@
     </form>
 
     <a href="{{ route('posts.show', $post) }}">수정 취소</a>
-</x-app-layout>
+</x-board-layout>
