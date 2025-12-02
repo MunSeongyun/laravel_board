@@ -15,7 +15,14 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::latest()->paginate(20); // 최신 글부터 페이징 처리하여 20개씩 표시
+        // 검색어가 있으면 Meilisearch에서 찾고, 없으면 그냥 DB 최신순
+
+        $search = request('search');
+        
+        $posts = $search 
+            ? Post::search($search)->paginate(20)   // search() 메서드는 Scout에서 제공
+            : Post::latest()->paginate(20);
+        
         return view('posts.index', compact('posts'));
     }
 

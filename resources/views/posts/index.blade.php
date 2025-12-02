@@ -32,7 +32,7 @@
     <br>
     <!-- 페이지네이션 링크, vendor/pagination의 tailwind.blade.php를 사용(퍼블리싱) -->
     <div>
-        {{ $posts->links() }}
+        {{ $posts->appends(['search' => request('search')])->links() }}
     </div>
     <br>
 </x-board-layout>
