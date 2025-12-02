@@ -35,4 +35,13 @@
         {{ $posts->appends(['search' => request('search')])->links() }}
     </div>
     <br>
+    <!-- 검색기능 -->
+    <form action="{{ route('posts.index') }}" method="GET">
+        @method('GET')
+        <div class="flex gap-2 w-full justify-center">
+            <x-text-input name="search" class="w-3/5" />
+            <x-styled-button>{{ __('Search') }}</x-styled-button>
+        </div>
+    </form>
+    <br>
 </x-board-layout>
