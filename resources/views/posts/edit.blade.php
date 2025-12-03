@@ -53,7 +53,7 @@
                             </label>
                             
                             <!-- 파일 다운로드/보기 링크 -->
-                            <a href="{{ Storage::url($file->file_path) }}" target="_blank" class="text-xs text-blue-500 hover:underline">
+                            <a href="{{ route('posts.downloadAttachment',$file) }}" target="_blank" class="text-xs text-blue-500 hover:underline">
                                 [{{ __('Download') }}]
                             </a>
                         </li>
