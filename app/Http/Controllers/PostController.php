@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
+use App\Models\UploadedFile;
 use Illuminate\Support\Facades\Gate;
+use App\Services\FileService;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -39,13 +42,20 @@ class PostController extends Controller
     /**
      * post 저장
      */
-    public function store(StorePostRequest $request)
+    public function store(StorePostRequest $request, FileService $fileService)
     {
         Gate::authorize('create', Post::class);
-
-        $post = new Post($request->validated());
-        $post->user_id = auth()->id(); // 현재 로그인한 사용자의 ID 할당
-        $post->save();
+        
+        $postData = $request->safe()->except('uploaded_files');
+        $files = $request->safe()->only(['uploaded_files']);
+        
+        $post = $request->user()->posts()->create($postData);
+        
+        if(!empty($files['uploaded_files'])){
+            foreach($files['uploaded_files'] as $file){
+                $fileService->upload($file, $post, 'posts');
+            }
+        }
         
         return redirect()->route('posts.index')->with('success', 'Post created successfully.');
     }
@@ -55,6 +65,17 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
+        // 1. 관리자인지 확인
+        if (auth()->user()?->can('restore', $post)) {
+            // withTrashed()를 사용하여 삭제된 파일도 포함해서 로드
+            $post->load(['uploadedFiles' => function ($query) {
+                $query->withTrashed();
+            }]);
+        } else {
+            // 일반 사용자는 정상 파일만 로드
+            $post->load('uploadedFiles');
+        }
+
         return view('posts.show', compact('post'));
     }
 
@@ -70,12 +91,28 @@ class PostController extends Controller
     /**
      * post 수정 처리
      */
-    public function update(UpdatePostRequest $request, Post $post)
+    public function update(UpdatePostRequest $request, Post $post, FileService $fileService)
     {
         Gate::authorize('update', $post);
 
-        $post->update($request->validated()); 
+        $postData = $request->safe()->except(['uploaded_files', 'delete_files']);
+        $fileData = $request->safe()->only(['uploaded_files']);
+        $deleteData = $request->safe()->only(['delete_files']);
 
+        $post->update($postData); 
+
+        if(!empty($fileData['uploaded_files'])){
+            foreach($fileData['uploaded_files'] as $file){
+                $fileService->upload($file, $post, 'posts');
+            }
+        }
+
+        if(!empty($deleteData['delete_files'])){
+            $filesToDelete = $post->uploadedFiles()->whereIn('id', $deleteData['delete_files'])->get();
+            foreach($filesToDelete as $file){
+                $fileService->delete($file);
+            }
+        }
     
         return redirect()->route('posts.show', $post)->with('success', '글이 성공적으로 수정되었습니다.');
     }
@@ -92,4 +129,14 @@ class PostController extends Controller
 
         return redirect()->route('posts.index')->with('success', 'Post deleted successfully.');
     }
+
+    /**
+     * 첨부파일 다운로드 처리
+     */
+    public function downloadAttachment(UploadedFile $file, FileService $fileService)
+    {
+        return $fileService->download($file);
+    }
+
+    
 }

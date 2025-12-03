@@ -25,6 +25,8 @@ class StorePostRequest extends FormRequest
         return [
             'title' => 'required|string|max:100',
             'content' => 'required|string',
+            'uploaded_files' => 'nullable|array',
+            'uploaded_files.*' => 'file|max:5120', // 각 파일 최대 크기 5MB
         ];
     }
 

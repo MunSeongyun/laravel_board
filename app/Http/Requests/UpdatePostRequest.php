@@ -25,6 +25,10 @@ class UpdatePostRequest extends FormRequest
         return [
             'title' => 'string|max:100',
             'content' => 'string',
+            'uploaded_files' => 'nullable|array',
+            'uploaded_files.*' => 'file|max:5120', // 각 파일 최대 크기 5MB
+            'delete_files' => 'nullable|array',
+            'delete_files.*' => 'integer|exists:uploaded_files,id',
         ];
     }
 

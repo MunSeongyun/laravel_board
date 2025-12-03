@@ -45,6 +45,10 @@
                                 href: data.image_url,
                             })
                         })
+                        .catch(() => {
+                            alert('max file size exceeded')
+                            event.attachment.remove()
+                        })
                 }
             }
 
