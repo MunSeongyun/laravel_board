@@ -21,8 +21,13 @@ class AdminPostController extends Controller
         Gate::authorize('restore', Post::class);
 
         $post->load(['uploadedFiles' => function ($query) {
-            $query->withTrashed();
-        }]);
+                $query->withTrashed();
+            }, 'comments' => function ($query) {
+                $query->withTrashed();
+                $query->with(['user' => function ($userQuery) {
+                    $userQuery->withTrashed();
+                }]);
+            }]);
     
         return view('posts.show', compact('post'));
     }

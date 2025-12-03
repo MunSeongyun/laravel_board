@@ -70,6 +70,8 @@ class Post extends Model
             $post->uploadedFiles()->withTrashed()->get()->each(function ($file) use ($fileService) {
                 $fileService->forceDelete($file);
             });
+            // 포스트에 달린 댓글들도 영구 삭제
+            $post->comments()->withTrashed()->forceDelete();
         });
 
         static::deleting(function ($post) {
@@ -81,6 +83,8 @@ class Post extends Model
             $post->uploadedFiles->each(function ($file) use ($fileService) {
                 $fileService->delete($file);
             });
+            // 포스트에 달린 댓글들도 소프트 삭제
+            $post->comments()->delete();
         });
 
         static::restored(function ($post) {
@@ -90,6 +94,8 @@ class Post extends Model
             $post->uploadedFiles()->onlyTrashed()->get()->each(function ($file) use ($fileService) {
                 $fileService->restore($file);
             });
+            // 포스트에 달린 댓글들도 복구
+            $post->comments()->onlyTrashed()->restore();
         });
     }
 }
