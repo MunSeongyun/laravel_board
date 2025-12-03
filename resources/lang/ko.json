@@ -29,5 +29,22 @@
     "Check to delete": "삭제하려면 선택하세요",
     "Download": "다운로드",
     "Maximum file size: 5MB per file.": "최대 파일 크기: 파일당 5MB.",
-    "New files will be added to the existing list.": "새 파일은 기존 목록에 추가됩니다."
+    "New files will be added to the existing list.": "새 파일은 기존 목록에 추가됩니다.",
+    "Comments":"댓글",
+    "Submit":"제출",
+    "Deleted Comment":"삭제된 댓글",
+    "Are you sure you want to delete this comment?":"댓글을 삭제하시겠습니까?",
+    "No comments yet. Be the first to comment!":"아직 댓글이 없습니다. 첫 댓글을 남겨보세요!",
+    "Are you sure you want to permanently delete this comment?":"댓글을 영구 삭제하시겠습니까?",
+    "Are you sure you want to restore this comment?":"댓글을 복원하시겠습니까?",
+    "Comment has been posted.": "댓글이 등록되었습니다.",
+    "Comment has been updated.": "댓글이 수정되었습니다.",
+    "Comment has been deleted.": "댓글이 삭제되었습니다.",
+    "Post has been created.": "게시글이 등록되었습니다.",
+    "Post has been updated.": "게시글이 수정되었습니다.",
+    "Post has been deleted.": "게시글이 삭제되었습니다.",
+    "Comment has been restored.": "댓글이 복원되었습니다.",
+    "Comment has been permanently deleted.": "댓글이 영구 삭제되었습니다.",
+    "Post has been restored.": "게시글이 복원되었습니다.",
+    "Post has been permanently deleted.": "게시글이 영구 삭제되었습니다."
 }

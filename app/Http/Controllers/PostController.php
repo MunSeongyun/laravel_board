@@ -57,7 +57,7 @@ class PostController extends Controller
             }
         }
         
-        return redirect()->route('posts.index')->with('success', 'Post created successfully.');
+        return redirect()->route('posts.index')->with('success', __('Post has been created.'));
     }
 
     /**
@@ -70,10 +70,15 @@ class PostController extends Controller
             // withTrashed()를 사용하여 삭제된 파일도 포함해서 로드
             $post->load(['uploadedFiles' => function ($query) {
                 $query->withTrashed();
+            }, 'comments' => function ($query) {
+                $query->withTrashed();
+                $query->with(['user' => function ($userQuery) {
+                    $userQuery->withTrashed();
+                }]);
             }]);
         } else {
             // 일반 사용자는 정상 파일만 로드
-            $post->load('uploadedFiles');
+            $post->load(['uploadedFiles', 'comments.user']);
         }
 
         return view('posts.show', compact('post'));
@@ -114,7 +119,7 @@ class PostController extends Controller
             }
         }
     
-        return redirect()->route('posts.show', $post)->with('success', '글이 성공적으로 수정되었습니다.');
+        return redirect()->route('posts.show', $post)->with('success', __('Post has been updated.'));
     }
 
     /**
@@ -127,7 +132,7 @@ class PostController extends Controller
         
         $post->delete();
 
-        return redirect()->route('posts.index')->with('success', 'Post deleted successfully.');
+        return redirect()->route('posts.index')->with('success', __('Post has been deleted.'));
     }
 
     /**

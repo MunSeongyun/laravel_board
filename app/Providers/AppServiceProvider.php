@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 use App\Models\Post;
+use App\Models\Comment;
 use App\Models\UploadedFile;
 use Illuminate\Support\Facades\Route;
 
@@ -35,6 +36,9 @@ class AppServiceProvider extends ServiceProvider
         // 관리자용 UploadedFile 바인딩: 삭제된 첨부파일 조회
         Route::bind('adminFile', function ($value) {
             return UploadedFile::withTrashed()->findOrFail($value);
+        });
+        Route::bind('adminComment', function ($value) {
+            return Comment::withTrashed()->findOrFail($value);
         });
     }
 }

@@ -12,6 +12,7 @@ use App\Policies\PostPolicy;
 use Illuminate\Database\Eloquent\Attributes\UsePolicy;
 use Laravel\Scout\Searchable; // Laravel Scout의 Searchable 트레이트 추가(멜리서치 사용 시 필요)
 use App\Services\FileService;
+use App\Models\Comment;
 
 #[UsePolicy(PostPolicy::class)] // 모델에 정책 연결 (없어도 됨)
 class Post extends Model
@@ -33,6 +34,11 @@ class Post extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
     }
 
     public function uploadedFiles()

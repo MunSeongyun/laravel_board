@@ -43,7 +43,7 @@ class AdminPostController extends Controller
 
         $post->restore(); // 글 복원
 
-        return redirect()->route('posts.trashed')->with('success', '글이 성공적으로 복원되었습니다.');
+        return redirect()->route('posts.trashed')->with('success', __('Post has been restored.'));
     }
 
     public function forceDelete(Post $post)
@@ -51,7 +51,7 @@ class AdminPostController extends Controller
         Gate::authorize('forceDelete', Post::class);  // 권한 확인
         $post->forceDelete(); // 영구 삭제
 
-        return redirect()->route('posts.trashed')->with('success', '글이 성공적으로 삭제되었습니다.');
+        return redirect()->route('posts.trashed')->with('success', __('Post has been permanently deleted.'));
     }
 
     /**
