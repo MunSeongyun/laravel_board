@@ -28,15 +28,16 @@ Route::middleware(['auth', 'can:admin'])->group(function () {
     Route::delete('admin/comments/{adminComment}', [AdminCommentController::class, 'forceDelete'])->name('comments.forceDelete');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/posts/{post}/comments',[CommentController::class,'store'])->name('posts.comments.store');
 
     // 댓글 수정, 삭제는 댓글 ID만으로 가능하므로 shallow routing 적용
@@ -47,13 +48,14 @@ Route::middleware('auth')->group(function () {
         'update', 'destroy'
     ])->shallow();
 
-    Route::resource('posts', PostController::class)->names([
-        'index' => 'posts.index'
-    ]);
+    Route::resource('posts', PostController::class)
+        ->except(['index', 'show']);
+
     Route::post('/attachments', AttachmentImageController::class)->name('posts.imageStore');
-    Route::get('/attachments/{file}', [PostController::class, 'downloadAttachment'])->name('posts.downloadAttachment');
 });
 
-
+Route::resource('posts', PostController::class)
+    ->only(['index', 'show']);
+Route::get('/attachments/{file}', [PostController::class, 'downloadAttachment'])->name('posts.downloadAttachment');
 
 require __DIR__.'/auth.php';

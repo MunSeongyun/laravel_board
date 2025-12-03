@@ -9,8 +9,10 @@ use Illuminate\Notifications\Notifiable;
 use App\Models\Post;
 use App\Models\Comment;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 
-class User extends Authenticatable
+// implements MustVerifyEmail 추가로 이메일 인증 기능 활성화
+class User extends Authenticatable implements MustVerifyEmail
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable, SoftDeletes;

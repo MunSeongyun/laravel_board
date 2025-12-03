@@ -14,7 +14,7 @@
     <h1 class="text-2xl">{{ $post->title }}</h1>
     
     <p>
-        <strong>{{ __('Writer in post show') }}</strong> {{ $post->user->name ?? __('Unknown') }} (ID: {{ $post->user_id }})
+        <strong>{{ __('Writer in post show') }}</strong> {{ $post->user->name ?? __('Unknown') }}
     </p>
     
     <hr>

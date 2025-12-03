@@ -5,6 +5,7 @@
         {{ __('Comments') }} <span class="text-base font-normal text-gray-500">({{ $post->comments->count() }})</span>
     </h3>
 
+    @if(!$post->trashed())
     <div class="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
         <form action="{{ route('posts.comments.store', $post) }}" method="POST">
             @csrf
@@ -23,7 +24,7 @@
             </div>
         </form>
     </div>
-
+    @endif
     <div class="space-y-4">
         @forelse ($post->comments as $comment)
         
