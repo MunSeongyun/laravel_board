@@ -36,5 +36,6 @@ return [
         'password' => '비밀번호',
         'uploaded_files' => '업로드된 파일',
         'delete_files' => '삭제된 파일',
+        'login_id' => '로그인 ID',
     ],
 ];

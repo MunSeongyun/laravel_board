@@ -23,6 +23,12 @@
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
 
+         <div>
+            <x-input-label for="loginId" :value="__('Login ID')" />
+            <x-text-input id="loginId" name="loginId" type="text" class="mt-1 block w-full" :value="old('loginId', $user->login_id)" required autocomplete="loginId" />
+            <x-input-error class="mt-2" :messages="$errors->get('login_id')" />
+        </div>
+
         <div>
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />

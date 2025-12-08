@@ -25,6 +25,24 @@ class ProfileUpdateRequest extends FormRequest
                 'max:255',
                 Rule::unique(User::class)->ignore($this->user()->id),
             ],
+            'login_id' => [
+                'required',
+                'string',
+                'max:50',
+                Rule::unique(User::class, 'login_id')->ignore($this->user()->id),
+            ],
         ];
+    }
+
+    /**
+     * Prepare the data for validation.
+     */
+    protected function prepareForValidation(): void
+    {
+        if ($this->has('loginId')) {
+            $this->merge([
+                'login_id' => $this->input('loginId'),
+            ]);
+        }
     }
 }

@@ -117,5 +117,7 @@
     
     "This account is currently deleted.": "현재 삭제된 계정입니다.",
     "Delete this user account. The user will not be able to login.": "이 사용자의 계정을 삭제합니다. 삭제 후에는 로그인할 수 없습니다.",
-    "Are you sure?": "정말 진행하시겠습니까?"
+    "Are you sure?": "정말 진행하시겠습니까?",
+
+    "Login ID": "로그인 ID"
 }
