@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Http\Requests\Admin\UpdateUserRequest;
+use App\Http\Requests\UserUpdateRequest;
 
 class AdminUserController extends Controller
 {
@@ -38,7 +38,7 @@ class AdminUserController extends Controller
     /**
      * 사용자 정보 수정
      */
-    public function update(UpdateUserRequest $request, User $user)
+    public function update(UserUpdateRequest $request, User $user)
     {
         $data = $request->validated();
 

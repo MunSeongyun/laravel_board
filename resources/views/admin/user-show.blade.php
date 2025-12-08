@@ -66,7 +66,7 @@
                             @csrf
                             <div>
                                 <x-input-label for="reason" :value="__('Ban Reason')" />
-                                <x-text-input id="reason" name="reason" type="text" class="mt-1 block w-full" placeholder="e.g. Abusive language" required />
+                                <x-text-input id="reason" name="reason" type="text" class="mt-1 block w-full" required />
                                 <x-input-error :messages="$errors->get('reason')" class="mt-2" />
                             </div>
 

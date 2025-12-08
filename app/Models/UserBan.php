@@ -15,4 +15,8 @@ class UserBan extends Model
         'banned_until',
         'reason',
     ];
+
+    protected $casts = [
+        'banned_until' => 'datetime',
+    ];
 }
