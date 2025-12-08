@@ -9,7 +9,8 @@ use App\Http\Controllers\AttachmentImageController;
 use App\Http\Controllers\CommentController;
 
 Route::get('/', function () {
-    return view('welcome');
+    // posts.index 뷰로 리다이렉트
+    return redirect()->route('posts.index');
 });
 
 // can:admin 미들웨어를 사용해서 AppServiceProvider에서 정의한 'admin' 권한을 확인

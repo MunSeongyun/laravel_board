@@ -84,7 +84,7 @@ return [
     |
     */
 
-    'soft_delete' => false,
+    'soft_delete' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -141,7 +141,7 @@ return [
         'key' => env('MEILISEARCH_KEY'),
         'index-settings' => [
             \App\Models\Post::class => [
-            'filterableAttributes' => ['id', 'user_id', 'created_at', 'title'], 
+            'filterableAttributes' => ['id', 'user_id', 'created_at', 'title', '__soft_deleted'], 
             
             'sortableAttributes' => ['created_at', 'updated_at'],
         ],

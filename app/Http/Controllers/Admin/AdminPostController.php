@@ -38,7 +38,14 @@ class AdminPostController extends Controller
     public function trashed()
     {
         Gate::authorize('restore', Post::class); // 복구 할 수 있는 사람만 접근 가능
-        $posts = Post::onlyTrashed()->latest()->paginate(20); // onlyTrashed 메서드로 삭제된 글만 조회
+
+        $search = request('search');
+        
+        $posts = $search 
+            ? Post::search($search)->onlyTrashed()->paginate(20)   // search() 메서드는 Scout에서 제공
+            : Post::onlyTrashed()->latest()->paginate(20);  // onlyTrashed 메서드로 삭제된 글만 조회
+
+        dd(Post::search($search)->latest()->paginate(20));
         return view('admin.post-index', compact('posts'));
     }
 
