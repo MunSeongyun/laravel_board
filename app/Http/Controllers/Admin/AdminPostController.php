@@ -45,7 +45,7 @@ class AdminPostController extends Controller
             ? Post::search($search)->onlyTrashed()->paginate(20)   // search() 메서드는 Scout에서 제공
             : Post::onlyTrashed()->latest()->paginate(20);  // onlyTrashed 메서드로 삭제된 글만 조회
 
-        dd(Post::search($search)->latest()->paginate(20));
+        
         return view('admin.post-index', compact('posts'));
     }
 

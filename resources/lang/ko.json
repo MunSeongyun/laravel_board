@@ -70,5 +70,7 @@
     "A new verification link has been sent to the email address you provided during registration.": "회원가입 시 제공한 이메일 주소로 새로운 인증 링크가 전송되었습니다.",
     "Resend Verification Email": "인증 이메일 재전송",
     "Log Out": "로그아웃",
-    "Log in": "로그인"
+    "Log in": "로그인",
+    "Management User": "사용자 관리",
+    "Admin Dashboard": "관리자 대시보드"
 }
