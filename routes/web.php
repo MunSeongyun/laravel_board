@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\AdminPostController;
 use App\Http\Controllers\Admin\AdminCommentController;
 use App\Http\Controllers\AttachmentImageController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\Admin\AdminUserController;
 
 Route::get('/', function () {
     // posts.index 뷰로 리다이렉트
@@ -27,6 +28,23 @@ Route::middleware(['auth', 'can:admin'])->group(function () {
 
     Route::patch('admin/comments/{adminComment}', [AdminCommentController::class, 'restore'])->name('comments.restore');
     Route::delete('admin/comments/{adminComment}', [AdminCommentController::class, 'forceDelete'])->name('comments.forceDelete');
+
+    Route::post('admin/users/{adminUser}/ban', [AdminUserController::class, 'ban'])->name('users.ban');
+    Route::delete('admin/users/{adminUser}/unban', [AdminUserController::class, 'unban'])->name('users.unban');
+
+    Route::resource('admin/users', AdminUserController::class)
+    ->parameters([
+        'users' => 'adminUser' // 'users' 리소스의 파라미터 이름을 'adminUser'로 변경해서 삭제된 유저도 포함
+    ])
+    ->only([
+        'index', 'show', 'edit', 'update', 'destroy'
+    ])->names([
+        'index' => 'users.index',
+        'show' => 'users.show',
+        'edit' => 'users.edit',
+        'update' => 'users.update',
+        'destroy' => 'users.destroy',
+    ]);
 });
 
 Route::middleware(['auth'])->group(function () {
@@ -38,7 +56,7 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth', 'verified', 'banned'])->group(function () {
     Route::post('/posts/{post}/comments',[CommentController::class,'store'])->name('posts.comments.store');
 
     // 댓글 수정, 삭제는 댓글 ID만으로 가능하므로 shallow routing 적용

@@ -72,5 +72,50 @@
     "Log Out": "로그아웃",
     "Log in": "로그인",
     "Management User": "사용자 관리",
-    "Admin Dashboard": "관리자 대시보드"
+    "Admin Dashboard": "관리자 대시보드",
+    "Account Suspended": "계정이 정지되었습니다",
+    "Your account has been suspended by the administrator.": "관리자에 의해 서비스 이용이 제한되었습니다.",
+    "Reason": "사유",
+    "No reason provided": "사유 미기재",
+    "Period": "기간",
+    "Until :date": ":date 까지",
+    "lifted": "해제",
+    "Permanent Ban": "영구 정지",
+    "User information has been updated.": "사용자 정보가 수정되었습니다.",
+    "User has been deleted.": "사용자가 삭제되었습니다.",
+    "User has been banned.": "사용자가 정지되었습니다.",
+    "User has been unbanned.": "사용자 정지가 해제되었습니다.",
+    "User Management": "사용자 관리",
+    "User Details": "사용자 상세 정보",
+    "Edit User": "사용자 정보 수정",
+    "Basic Information": "기본 정보",
+    "Account Suspension": "계정 정지 관리",
+    
+    "Status": "상태",
+    "Joined": "가입일",
+    "Actions": "관리",
+    "View": "보기",
+    "Edit Info": "정보 수정",
+    "Back to List": "목록으로 돌아가기",
+
+    "Active": "정상",
+    "Banned": "정지됨",
+    "Deleted": "삭제됨",
+    "Deleted Account": "삭제된 계정",
+    "Suspended": "이용 정지",
+
+    "This user is currently banned.": "현재 정지된 사용자입니다.",
+    "Expires": "만료일",
+    "Permanent": "영구",
+
+
+    "Ban User": "사용자 정지",
+    "Unban User": "정지 해제",
+    "Ban Reason": "정지 사유",
+    "Ban Duration": "정지 기간",
+    "Days": "일",
+    
+    "This account is currently deleted.": "현재 삭제된 계정입니다.",
+    "Delete this user account. The user will not be able to login.": "이 사용자의 계정을 삭제합니다. 삭제 후에는 로그인할 수 없습니다.",
+    "Are you sure?": "정말 진행하시겠습니까?"
 }

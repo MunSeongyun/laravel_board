@@ -27,7 +27,7 @@
                     </div>
                 </a>
 
-                <a href="{{ route('posts.trashed') }}" class="block p-6 bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition duration-150 ease-in-out border-l-4 border-blue-500">
+                <a href="{{ route('users.index') }}" class="block p-6 bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition duration-150 ease-in-out border-l-4 border-blue-500">
                     <div class="flex items-center">
                         <div class="p-3 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-500 dark:text-blue-300">
                             <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">

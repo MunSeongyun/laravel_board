@@ -8,6 +8,7 @@ use App\Models\Post;
 use App\Models\Comment;
 use App\Models\UploadedFile;
 use Illuminate\Support\Facades\Route;
+use App\Models\User;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -39,6 +40,9 @@ class AppServiceProvider extends ServiceProvider
         });
         Route::bind('adminComment', function ($value) {
             return Comment::withTrashed()->findOrFail($value);
+        });
+        Route::bind('adminUser', function ($value) {
+            return User::withTrashed()->findOrFail($value);
         });
     }
 }

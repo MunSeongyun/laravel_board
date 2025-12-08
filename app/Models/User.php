@@ -10,6 +10,8 @@ use App\Models\Post;
 use App\Models\Comment;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\UserBan;
+use App\Models\UploadedFile;
 
 // implements MustVerifyEmail 추가로 이메일 인증 기능 활성화
 class User extends Authenticatable implements MustVerifyEmail
@@ -81,4 +83,32 @@ class User extends Authenticatable implements MustVerifyEmail
     public function is_admin() : bool {
         return $this->email === env('ADMIN_EMAIL', 'testadmin@g.yju.ac.kr');
     }
+
+    public function bans()
+    {
+        return $this->hasMany(UserBan::class);
+    }
+
+    // 사용자가 현재 차단 상태인지 확인하는 메서드
+    public function isBanned(): bool
+    {
+        $latestBan = $this->bans()->latest('banned_until')->first();
+
+        if (!$latestBan) {
+            return false; // 차단 기록이 없음
+        }
+
+        if (is_null($latestBan->banned_until)) {
+            return true; // 영구 정지
+        }
+        
+        return $latestBan->banned_until->isFuture(); // 현재 시간이 banned_until보다 이전인지 확인
+    }
+
+    // 현재 차단 사유와 기간을 확인하는 메서드
+    public function latestBan()
+    {
+        return $this->bans()->latest('banned_until')->first();
+    }
+
 }
